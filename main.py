@@ -22,7 +22,7 @@ dispatcher = updater.dispatcher
 g_dislike = 0
 d_like = 0
 
-lst = {}
+dct = {}
 
 def start(update: Update, context: CallbackContext):
     chat_id = update.message.chat_id
@@ -56,7 +56,7 @@ def query(update: Update, context: CallbackContext):
         else:
             return
 
-        previous_choice = lst.get(chat_id)
+        previous_choice = dct.get(chat_id, None)
 
         if previous_choice == current_choice:
             return 
@@ -71,7 +71,7 @@ def query(update: Update, context: CallbackContext):
         else:
             g_dislike += 1
 
-        lst[chat_id] = current_choice
+        dct[chat_id] = current_choice
 
         keyboard1 = InlineKeyboardButton(
             f"dislike 👎 {g_dislike}", callback_data="1dislike"
