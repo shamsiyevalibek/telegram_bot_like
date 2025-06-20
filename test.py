@@ -9,6 +9,7 @@ try:
 except:
     dct = {12345: "like"}
 
+
 print(dct["12345"])
 json_string = json.dumps(dct)
 
