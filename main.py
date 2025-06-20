@@ -21,22 +21,21 @@ token = os.getenv("token")
 updater = Updater(token=token)
 dispatcher = updater.dispatcher
 
-f = open("count.json", "r")
+with open("count.json", "r") as f:
 
-try:
-    count = json.loads(f.read())
-except:
-    count = {"like": 0, "dislike": 0}
+    try:
+        count = json.loads(f.read())
+    except:
+        count = {"like": 0, "dislike": 0}
 
 g_dislike = count["dislike"]
 d_like = count["like"]
 
-f = open("text.json", "r")
-
-try:
-    dct = json.loads(f.read())
-except:
-    dct = {}
+with open("text.json", "r") as f:
+    try:
+        dct = json.loads(f.read())
+    except:
+        dct = {}
 
 
 def start(update: Update, context: CallbackContext):
@@ -70,7 +69,7 @@ def query(update: Update, context: CallbackContext):
         else:
             return
 
-        previous_choice = dct.get(chat_id, None)
+        previous_choice = dct.get(str(chat_id), None)
 
         if previous_choice == current_choice:
             return
@@ -85,15 +84,16 @@ def query(update: Update, context: CallbackContext):
         else:
             g_dislike += 1
 
-        f = open("count.json", "w")
-        json_string = json.dumps({"like": d_like, "dislike": g_dislike})
-        f.write(json_string)
+        with open("count.json", "w") as f:
+            json_string = json.dumps({"like": d_like, "dislike": g_dislike})
+            f.write(json_string)
 
-        dct[chat_id] = current_choice
+        dct[str(chat_id)] = current_choice
 
-        f = open("text.json", "w")
-        json_string = json.dumps(dct)
-        f.write(json_string)
+
+        with open("text.json", "w") as f:
+            json_string = json.dumps(dct)
+            f.write(json_string)
 
         keyboard1 = InlineKeyboardButton(
             f"dislike 👎 {g_dislike}", callback_data="1dislike"
