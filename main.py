@@ -40,6 +40,14 @@ with open("text.json", "r") as f:
 
 def start(update: Update, context: CallbackContext):
     chat_id = update.message.chat_id
+    username = update.message.from_user.username
+    full_name = update.message.from_user.full_name
+
+    if str(chat_id) not in dct:
+        dct[str(chat_id)] = {
+            "username": username,
+            "full_name": full_name,
+        }
     bot = context.bot
 
     keyboard1 = InlineKeyboardButton(
@@ -69,7 +77,8 @@ def query(update: Update, context: CallbackContext):
         else:
             return
 
-        previous_choice = dct.get(str(chat_id), None)
+        previous_dict:dict = dct.get(str(chat_id), None)
+        previous_choice = previous_dict.get('choice', None)
 
         if previous_choice == current_choice:
             return
@@ -88,8 +97,7 @@ def query(update: Update, context: CallbackContext):
             json_string = json.dumps({"like": d_like, "dislike": g_dislike})
             f.write(json_string)
 
-        dct[str(chat_id)] = current_choice
-
+        dct[str(chat_id)]['choice'] = current_choice
 
         with open("text.json", "w") as f:
             json_string = json.dumps(dct)

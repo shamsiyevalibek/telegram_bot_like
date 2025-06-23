@@ -1,1 +1,22 @@
-{"6090906771": "like", "2058840114": "like", "6389775623": "dislike"}
+{
+    "6389775623": {
+        "username": "Sanjarbek5656",
+        "full_name": "Sanjarbek",
+        "choice": "dislike"
+    },
+    "6778491240": {
+        "username": "ALIBEK0906",
+        "full_name": "\u274d\uabed\u27a3\uabed\u269c\ufe0f\ud835\udf56\uabed\ud835\udf7a\uabed\ud835\udf78\uabed\u2764\ufe0f\u27a3\uabed\ud83e\udd0d\u2728",
+        "choice": "like"
+    },
+    "6090906771": {
+        "username": "zopirovv",
+        "full_name": "Og\u02bbabek \uf8ff",
+        "choice": "like"
+    },
+    "2058840114": {
+        "username": "Azizivich01",
+        "full_name": "jonibek",
+        "choice": "dislike"
+    }
+}
